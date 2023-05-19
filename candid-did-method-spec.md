@@ -1,19 +1,20 @@
 # CANDID DID Method Specification
 
+
 ## DID Method Name
 The name string that shall identify this DID method is:  `candid`
 
 A DID that uses this method MUST begin with the following prefix: `did:candid`. Per the DID specification, this string MUST be in lowercase. The remainder of the DID, after the prefix, is specified below.
 
 ## Method Specific Identifier
-```json
-candid-did = did:candid:<candid-specific-identifier>
-candid-specific-identifier = [ <network> ":" ] <candid-id>
-network = <lowercase-char>{1,10}, "ex. ethereum | goerli | polygon"
-candid-id = base58(sha256(uuid())) "The uuid uses version 4"
-lowercase-char = [0-9 a-z]
-sha256 = [0-9 a-f] 64*HEXDIG
-base58 = [^0OIl+\/]
+```
+candid-did          := did:candid:<specific-identifier>
+specific-identifier := [ <network> ":" ] <candid-id>
+network             := <lowercase-char>{1,10}, "ex. ethereum | goerli | polygon"
+candid-id           := base58(sha256(uuid())) "The uuid uses version 4"
+lowercase-char      := [0-9 a-z]
+sha256              := [0-9 a-f] 64*HEXDIG
+base58              := [^0OIl+\/]
 ```
 The method-specific identifier is a unique identifier created using a specific method. First, a function generates a random 128-bit number. Then, this number is encrypted to obtain a 256-bit hash value. Finally, this hash value is converted to a base58 format to obtain the final `candid-id`.
 This generation process ensures the uniqueness and security of the `candid-id`.
