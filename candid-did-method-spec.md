@@ -74,5 +74,21 @@ Changes to an identity contract are made through executing transactions directly
 ### Delete
 Only the controller address is able to delete an existing DID.
 
+## Security Considerations
+### Proving Control and Binding
+* `candid` employs digital signatures to prevent forgery. During the verification of DID document, it ensures that the DID document has not been tampered with and have not been recently revoked.
+
+* Only the DID controller has the authority to deactivate the DID, add or delete DID controllers, and delete services associated with the DID. On the other hand, only the DID owner has the capability to perform actions such as adding verifiable credentials, revoking issued verifiable credentials, and changing the DID owner. Therefore, the ability to perform certain actions is restricted to the controller of the DID.
+
+### Non-Repudiation
+* When resolving a DID document, a timestamp indicating the creation or update time of the document can be obtained.
+
+## Privacy Considerations
+### Choosing DID Resolvers
+* The Candid-Resolver-SDK is an open-source program that offers a service for resolving `candid`. This ensures that the correct DID document is retrieved during the resolution process.
+
+### Keep Personal Data Private
+* The generation process ensures the uniqueness and security of the candid-id. Additionally, before the DID is recorded on-chain, the uniqueness of the identifier **MUST** confirmed through smart contract validation. Ensuring the uniqueness of the identifier while safeguarding personal information from disclosure. The on-chain data does not contain personal identity information but only includes the DID, public key, and service-related information.
+
 ## References
 [1] [**W3C DID Core**](https://www.w3.org/TR/did-core/)
